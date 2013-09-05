@@ -21,11 +21,11 @@ import org.jsoup.nodes.Element;
  */
 public class HtmlToExcel
 {
-    public static HSSFWorkbook convertToHSSFWorkbook(StringBuilder html)
+    public static HSSFWorkbook convertToHSSFWorkbook(String html)
     {
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("Sheet1");
-        Document doc = Jsoup.parse(html.toString());
+        Document doc = Jsoup.parse(html);
         for (Element table : doc.select("table")) {
             int rownum = 0;
             for (Element row : table.select("tr")) {
@@ -41,11 +41,11 @@ public class HtmlToExcel
         return workbook;
     }
 
-    public static XSSFWorkbook convertToXSSFWorkbook(StringBuilder html)
+    public static XSSFWorkbook convertToXSSFWorkbook(String html)
     {
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet("Sheet1");
-        Document doc = Jsoup.parse(html.toString());
+        Document doc = Jsoup.parse(html);
         for (Element table : doc.select("table")) {
             int rownum = 0;
             for (Element row : table.select("tr")) {
@@ -60,4 +60,15 @@ public class HtmlToExcel
         }
         return workbook;
     }
+
+    public static XSSFWorkbook convertToXSSFWorkbook(StringBuilder html)
+    {
+        return convertToXSSFWorkbook(html.toString());
+    }
+
+    public static HSSFWorkbook convertToHSSFWorkbook(StringBuilder html)
+    {
+        return convertToHSSFWorkbook(html.toString());
+    }
+
 }
